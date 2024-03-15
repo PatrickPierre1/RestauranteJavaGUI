@@ -9,8 +9,8 @@ import javax.swing.JPanel;
 
 public class TelaInicial extends JFrame{
     private JComboBox<Prato> dropdownPratos;
-    private JComboBox<String> dropdownBebidas;
-    private JComboBox<String> dropdownSobremesas;
+    private JComboBox<Bebida> dropdownBebidas;
+    private JComboBox<Sobremesa> dropdownSobremesas;
     private JButton buttonPedir;
     private String pedido;
     public TelaInicial() {
@@ -49,15 +49,37 @@ public class TelaInicial extends JFrame{
         dropdownPratos.setVisible(true);
         painel.add(dropdownPratos,constraints);
 
-        String[] bebidas = {"Coca-cola - R$ 7,00","Tubaina 1,5L - R$ 10,00"," Guaraná 2L - R$ 13,00"};
-        dropdownBebidas = new JComboBox<String>(bebidas);
+        //String[] bebidas = {"Coca-cola - R$ 7,00","Tubaina 1,5L - R$ 10,00"," Guaraná 2L - R$ 13,00"};
+        //dropdownBebidas = new JComboBox<String>(bebidas);
+
+        var listaBebidas = Arrays.asList(
+                new Bebida("Coca-cola 1L", 7.99F),
+                new Bebida("Tubaina 1,5L",9.99F),
+                new Bebida("Guaraná 2L",12.99F)
+        );
+
+        dropdownBebidas = new JComboBox<Bebida>();
+        listaBebidas.forEach(s -> dropdownBebidas.addItem(s));
         constraints.gridx = 1;
         constraints.gridy = 1;
         dropdownBebidas.setVisible(true);
         painel.add(dropdownBebidas,constraints);
 
-        String[] sobremesas = {"Pudim - R$ 8,00","Mini Pizza Sorvete - R$ 16,00","Gelatina Abacaxi - R$ 5,00","Churros - R$ 7.00","Bolo de vó - R$ 3,00","Petit Gateau - R$ 14,00"};
-        dropdownSobremesas = new JComboBox<String>(sobremesas);
+        //String[] sobremesas = {"Pudim - R$ 8,00","Mini Pizza Sorvete - R$ 16,00","Gelatina Abacaxi - R$ 5,00","Churros - R$ 7.00","Bolo de vó - R$ 3,00","Petit Gateau - R$ 14,00"};
+        //dropdownSobremesas = new JComboBox<String>(sobremesas);
+
+        var listaSobremesas = Arrays.asList(
+                new Sobremesa("Pudim", 7.99F),
+                new Sobremesa("Mini Pizza Sorvete",15.99F),
+                new Sobremesa("Gelatina Abacaxi",4.99F),
+                new Sobremesa("Churros",6.99F),
+                new Sobremesa("Bolo de vó",3.99F),
+                new Sobremesa("Petit Gateau", 13.99F)
+        );
+
+        dropdownSobremesas = new JComboBox<Sobremesa>();
+        listaSobremesas.forEach(s -> dropdownSobremesas.addItem(s));
+
         constraints.gridx = 2;
         constraints.gridy = 1;
         dropdownSobremesas.setVisible(true);
@@ -77,19 +99,19 @@ public class TelaInicial extends JFrame{
     public JComboBox<Prato> getDropdownPratos() {
         return dropdownPratos;
     }
-    public JComboBox<String> getDropdownBebidas() {
+    public JComboBox<Bebida> getDropdownBebidas() {
         return dropdownBebidas;
     }
-    public JComboBox<String> getDropdownSobremesas() {
+    public JComboBox<Sobremesa> getDropdownSobremesas() {
         return dropdownSobremesas;
     }
     private void executarAcaoBotao() {
         Prato prato = (Prato) dropdownPratos.getSelectedItem();
-        var bebida = dropdownBebidas.getSelectedItem();
-        var sobremesa =  dropdownSobremesas.getSelectedItem();
+        Bebida bebida = (Bebida) dropdownBebidas.getSelectedItem();
+        Sobremesa sobremesa = (Sobremesa) dropdownSobremesas.getSelectedItem();
 
 
-        pedido = "Prato: " + prato.getDescricao() + "\nSobremesa: " + sobremesa + "\nBebida: " + bebida + "\n";
+        pedido = "Prato: " + prato.getDescricao() + "\nBebida: " + bebida.getDescricao() + "\nSobremesa: " + sobremesa.getDescricao()  + "\n";
 
 
         System.out.println(pedido);
