@@ -12,7 +12,7 @@ public class TelaInicial extends JFrame{
     private JComboBox<Bebida> dropdownBebidas;
     private JComboBox<Sobremesa> dropdownSobremesas;
     private JButton buttonPedir;
-    private String pedido;
+    private String pedidoNome;
     public TelaInicial() {
         setTitle("Cardápio Online");
         setSize(1000,500);
@@ -110,10 +110,18 @@ public class TelaInicial extends JFrame{
         Bebida bebida = (Bebida) dropdownBebidas.getSelectedItem();
         Sobremesa sobremesa = (Sobremesa) dropdownSobremesas.getSelectedItem();
 
+        pedidoNome = "Prato: " + prato.getDescricao() + " \nBebida: " + bebida.getDescricao() + " \nSobremesa: " + sobremesa.getDescricao()  + "\n";
 
-        pedido = "Prato: " + prato.getDescricao() + "\nBebida: " + bebida.getDescricao() + "\nSobremesa: " + sobremesa.getDescricao()  + "\n";
+        double taxa = 0.1;
+        float pedidoValorTotal = prato.getValor() + bebida.getValor() + sobremesa.getValor();
+
+        var telapagamento = new TelaPagamento();
 
 
-        System.out.println(pedido);
+        telapagamento.telaPagamento(pedidoNome, pedidoValorTotal);
+
+        System.out.println(pedidoNome);
+        System.out.println(pedidoValorTotal);
     }
 }
+
