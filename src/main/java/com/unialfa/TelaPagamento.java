@@ -82,11 +82,6 @@ public class TelaPagamento extends JFrame{
         constraints.gridy = 4;
         painel.add(labelPedidoValorTotal, constraints);
 
-        var labelTipoPagamento = new JLabel( "Forma de pagamento:  "+ tipoPagamento);
-        constraints.gridx = 1;
-        constraints.gridy = 5;
-        painel.add(labelTipoPagamento, constraints);
-
         buttonPagar = new JButton("Pagar");
         buttonPagar.addActionListener(e -> executarPagamento(pedidoValorTotal));
         constraints.gridx = 1;
